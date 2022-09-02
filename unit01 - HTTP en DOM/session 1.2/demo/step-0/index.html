@@ -4,6 +4,14 @@
    <style>
 
       /* your CSS here... */
+      .notShown { 
+         display: none;
+      }
+
+      .lengthExceeded, .lengthExceeded:focus {
+         border: 2px solid red;
+         outline: none;
+      }
 
    </style>
 </head>
@@ -46,6 +54,74 @@
 <script>
 
    /* your JavaScript here... */
+   const tweetEl = document.getElementById("tweetText");
+   const authorEl = document.getElementById("authorName");
+   const buttonsEl = document.getElementById("buttonsDiv");
+   const counterEl = document.getElementById("counterDiv");
+   const charEl = document.getElementById("characterCounter");
+   const sendButton = document.getElementById("sendButton");
+   const photoButton = document.getElementById("photoButton");
+   const photoFile = document.getElementById("photoFile");
+   const tweetForm = document.getElementById("tweetForm");
+   const tweetList= document.getElementById("tweetList");
 
+   function onFocus () {
+      tweetEl.rows = 4;
+      buttonsEl.classList.remove("notShown");
+      counterEl.classList.remove("notShown");
+      
+   }
+
+   tweetEl.addEventListener("focus", onFocus);
+   //TO DO RODE BORDER FIXEN
+   tweetEl.addEventListener("input", checkForm);
+
+   function checkForm () {
+      const chars = tweetEl.value.length;
+      
+      charEl.innerHTML = chars;
+      if (chars > 139){
+         tweetEl.classList.add("lengthExceeded");
+         sendButton.disabled = true;
+      } else {
+         tweetEl.classList.remove("lengthExceeded");
+         sendButton.disabled = false;
+      }
+      //werkt alleen als ik eerst iets type en dan weghaal
+      if (chars === 0){
+         sendButton.disabled = true;
+      }
+   }
+   //voer hem eerst apart uit anders is de send tweet button niet disabled
+   checkForm();
+   
+   //5.
+   //when user clicks on photobutton, show photofilebutton
+
+   function focusPhoto () {
+      photoFile.classList.remove("notShown");
+   }
+
+   photoButton.addEventListener("click", focusPhoto);
+
+   //6.
+   tweetForm.addEventListener("submit", function(event){
+      //hij refresht nu niet
+      event.preventDefault();
+      const tweet = tweetEl.value;
+      const author = authorEl.value;
+
+      const newTweet = document.createElement("li");
+      newTweet.innerHTML = 
+      `
+            <strong><em>${author}</em></strong><br>
+            ${tweet}
+            <hr>
+         `;
+         //je gebruikt geen appendChild van template is nog geen dom element
+         tweetList.append(newTweet);
+   });
+
+   
 </script>
 </html>
