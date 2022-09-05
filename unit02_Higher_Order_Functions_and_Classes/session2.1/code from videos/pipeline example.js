@@ -40,6 +40,8 @@ function giftWrapped( price, wrapStyle = "simple" ) {
 result1 = pipeLine( myOrder, [totalPrice,withVAT,withShipping,giftWrapped])
 console.log("result from 1st pipline:", result1);
 
+//omdat je bij de functie giftWrapped een extra parameter wilt meegeven, maar je in de functie pipeLine maar 1 parameter meegeeft,
+//moet je het opschrijven als een arrow functie, de input parameter haalt nu het resultaat op en stopt het in de functie.
 result2 = pipeLine( myOrder, [totalPrice,withVAT,withShipping,input => giftWrapped(input,"fancy")])
 console.log("result from 1st pipline:", result2);
 
