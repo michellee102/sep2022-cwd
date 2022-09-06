@@ -20,6 +20,7 @@ function withShipping( price ) {
     return price;
 }
 
+//alle functies die worden meegegeven krijgen 1 parameter!
 function pipeLine( input, functions ) {
   let result = input;
   for( f of functions ) {
@@ -28,6 +29,7 @@ function pipeLine( input, functions ) {
   return result
 }
 
+//neemt 2 parameters, wrapstyle is simple als geen parameter wordt meegegeven
 function giftWrapped( price, wrapStyle = "simple" ) {
   if( wrapStyle == "simple" )
     return price + 2.00;
@@ -37,6 +39,8 @@ function giftWrapped( price, wrapStyle = "simple" ) {
     return price;
 }
 
+//nu krijg je bij de functie giftWrapped altijd de wrapStyle simple, oplossing? ->>
+//je kan ook geen "fancy" meegeven als parameter omdat je dan de functie aanroept en dan krijg je het resultaat en geen functie
 result1 = pipeLine( myOrder, [totalPrice,withVAT,withShipping,giftWrapped])
 console.log("result from 1st pipline:", result1);
 
@@ -46,7 +50,7 @@ result2 = pipeLine( myOrder, [totalPrice,withVAT,withShipping,input => giftWrapp
 console.log("result from 1st pipline:", result2);
 
 
-
+//OPLOSSING 2: functie die functie maakt
 
 function giftWrapped( price, wrapStyle = "simple" ) {
   if( wrapStyle == "simple" )
@@ -73,7 +77,7 @@ console.log("fancyWrapped(100)", fancyWrapped(100))
 console.log("simpleWrapped(100)",simpleWrapped(100))
 console.log("notWrapped(100)",   notWrapped(100))
 
-
+//maakt een functie die een gift wrapped, dus returned een functie
 function makeWrapper( style ) {
   return function(price) {
     return giftWrapped(price, style)
@@ -102,4 +106,6 @@ console.log("pipeline met makeWrapper('armour'):", pipeLine( myOrder, [totalPric
 
 console.log( "makeWrapper('armour')(100)", makeWrapper("armour")(100) )
 
+//makewrapper function omgeschreven naar arrow functie
+//makewrapper neemt een parameter style, die returned een functie 'giftwrapped' die weer een parameter price neemt
 makeWrapper = style => price => giftWrapped(price, style)
