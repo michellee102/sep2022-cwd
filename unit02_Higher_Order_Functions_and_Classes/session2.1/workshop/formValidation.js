@@ -54,3 +54,27 @@ function isRequired(value) {
   console.log(`Checked required field «${value}»:`, result);
   return result;
 }
+
+function hasMaxLength(maxLength){
+  return function(value){
+    if (value.length <= maxLength){
+      console.log(`checked «${value}» is valid!!!!!!!! `);
+      return true;
+    } else {
+      console.log(`checked «${value}» is not valid!!!!!!!`);
+      return false;
+    }
+  }
+};
+
+function hasMinLength(minLength){
+  return function(value){
+    if (value.length >= minLength){
+      console.log(`checked «${value}» is valid!!!!!!!! `);
+      return true;
+    } else {
+      console.log(`checked «${value}» is not valid!!!!!!!`);
+      return false;
+    }
+  }
+};
