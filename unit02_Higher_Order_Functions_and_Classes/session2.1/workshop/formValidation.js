@@ -78,3 +78,15 @@ function hasMinLength(minLength){
     }
   }
 };
+
+//geen idee
+function checkBoth(checker1, checker2){
+  return function(){
+    if (hasMaxLength === true && hasMinLength === true){
+      console.log("goed !");
+      return true;
+    } 
+    console.log("niet goed!");
+    return false;
+  }
+};

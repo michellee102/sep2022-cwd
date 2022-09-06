@@ -8,7 +8,7 @@ window.onload = function initializeApp() {
   // The form-validator uses functions to check if a field has valid input.
   // This object defines which checker functions work for which form fields.
   const theFormCheckers = {
-    achternaam: hasMaxLength(5), // isRequired is a checker defined in formValidation.js
+    achternaam: checkBoth(hasMaxLength(20), hasMinLength(10)), // isRequired is a checker defined in formValidation.js
     postcode: isaPostCode,  // isaPostCode is a checker defined in this file.
     huisnummer: isRequired,
     voornaam: hasMaxLength(10)
