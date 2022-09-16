@@ -51,7 +51,7 @@ class Counter extends React.Component {
     return (
       <div>
         <h1>counter = {this.state.count}</h1>
-        //werkt nu omdat we this binden aan react component Counter
+        {/* werkt nu omdat we this binden aan react component Counter */}
         <button onClick={this.up.bind(this)}> Up </button>
       </div>
     );
